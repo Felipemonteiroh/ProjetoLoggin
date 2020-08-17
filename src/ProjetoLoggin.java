@@ -5,10 +5,23 @@ public class ProjetoLoggin {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+        String senha = "null";
 
-        System.out.println("Crie um login");
+        System.out.println("Digite seu nome completo");
+        String nome = scanner.nextLine();
 
-        String login1 = scanner.nextLine();
+        StringBuilder ultimo = new StringBuilder("_");
+
+                for (int i = nome.lastIndexOf(" ")+1; i <= nome.length(); i++){
+            if (i < nome.length()) {
+                ultimo.append(nome.charAt(i));
+            }
+        }
+
+        String login = nome.charAt(0)+ultimo.toString();
+
+
+        System.out.println("Seu login é: " + login);
 
 
         System.out.println("Crie uma senha com no minimo 8 digitos " );
@@ -19,44 +32,44 @@ public class ProjetoLoggin {
         System.out.println( "caracteres especiais");
 
 
-        String senha = scanner.nextLine();
 
+        boolean validaSenhaPadrao = false;
 
-        if (senha.length() >=8){
-        System.out.println("senha valida");
+        while (validaSenhaPadrao == false){
 
-        }else {
-            System.out.println("senha nao possui requisitos minimos");
+            senha = scanner.nextLine();
 
+            if (senha.length() >= 8 && senha.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[-, !, @])(?=.*[A-Z])(?=.*\\d).+")){
+                System.out.println("Senha está dentro do padrão... direcionando para login...");
+                validaSenhaPadrao = true;
+            } else{
+                System.out.println("Senha está fora do padrão... digite uma nova senha");
+            }
         }
 
-        System.out.println("digite seu login");
-        String login2 = scanner.nextLine();
 
-        if(login1.equals(login2)){
-            System.out.println("login correto");
-        }else{
-            System.out.println("login incorreto");
-        }
+        boolean doLogin = false;
+
+        while (doLogin == false){
+
+            System.out.println("digite seu login");
+                String login1 = scanner.nextLine();
 
 
             System.out.println("digite dua senha");
-
             String passaword = scanner.nextLine();
 
-
-            if (passaword.equals(senha)){
-                System.out.println("senha valida");
+            if (login.equals(login) && passaword.equals(senha)){
+                System.out.println("Login realizado com sucesso!");
+                doLogin = true;
+            }else{
+                System.out.println("Login ou senha invalido... tente novamente!");
             }
-            else {
-                System.out.println("senha invalida");
-            }
-
-
-
+        }
 
  }
 }
+
 
 
 
